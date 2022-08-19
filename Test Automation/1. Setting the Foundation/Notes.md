@@ -68,4 +68,5 @@ Let's remember that is very important to communicate the goal of your test autom
 ### Developing for Test Automatability
 
 Mike cohn introduced the Test Automation pyramid, which is a model that describes three levels in which tests can be automated against: unit, services, and UI.
-![Testing Pyramid](pyramid.png)
+
+<img src='pyramid.png' alt='Testing Pyramid' style='display: block; margin-left: auto; margin-right: auto; width: 50%'>
