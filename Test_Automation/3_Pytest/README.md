@@ -35,3 +35,16 @@ tests/test_math.py:21: AssertionError
 ```
 
 If a test fails because an Assertion is not being satisfied, **although** it can also fail for any *unhandled* error.
+
+
+## Verifying exception handling in pytest
+
+Exceptions from one test case, will not affect other test cases.
+
+Pytest provides a construct for handling expected exceptions.
+
+For this to work, you need to import `pytest`
+
+**with** is a special statement for automatically handling extra *enter* and *exit* logic for a caller.
+
+The *enter* logic opens the files, the body reads or writes, and the *exit* logic closes the file.
