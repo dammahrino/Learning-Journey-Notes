@@ -74,3 +74,20 @@ def test_multiplication_parameterized(number_1, number_2, product_result):
 
 ```
 
+## Testing Classes
+
+Unit tests: are small tests that directly cover functions and class methods, more generally, the cover _units_ of work.
+
+Any directory with a file named `__init__.py` is treated as a package, and any modules inside that package may be imported by other modules.
+> Dunder -> Colloquialism for __ (double underscore)
+
+Pytest doest not require tests to be a package, in fact, making the tests directory a package, may cause unwanted behavior with some tools, like _tox_.
+
+Private files are declared with a single leading underscore, like `_count`.
+
+Properties can determine, how a class will _get_ and _set_ values (like in Java with _setters_ and _getters_). Python properties are defined with the `@property` decorator.
+
+_AAA_ pattern, for functional test cases.
+- **A**rrange (assets for the test, like a setup procedure)
+- **A**ct (by exercising the target behavior)
+- **A**ssert (that expected outcomes happen)
