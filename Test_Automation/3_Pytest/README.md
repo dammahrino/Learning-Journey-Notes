@@ -91,3 +91,46 @@ _AAA_ pattern, for functional test cases.
 - **A**rrange (assets for the test, like a setup procedure)
 - **A**ct (by exercising the target behavior)
 - **A**ssert (that expected outcomes happen)
+
+## Fixtures
+With our previous configuration, in every test we have repeated the creation of the Accumulator object, which violates de DRY principle.
+
+Pytest provides an useful feature for this, which are _fixtures_. 
+
+Fixtures are special functions that pytest can call **before** test case functions. They are very useful when creating the **Arrange** steps, which are commonly shared among test cases.
+
+> A fixture should **always** return a value.
+
+### Fixture inner workings
+1. When Pytest discovers a test function, it looks at the parameter list.
+2. In our case, our function has the parameter _accum_, so it will look at a fixture named accum.
+3. Pytest executes the fixture and passes the fixture return value to the function.
+
+Note: This is a clever form of _dependency injection_.
+
+This also severs as a "Separation of Concerns", which adds readability, consistency, and maintainability to our Test Case.
+
+Function based way to handle setup and cleanup operations in Tests.
+
+A test case can have multiple fixtures, just make sure each fixture has an unique name.
+
+If a fixture instead of the `return` keyword, has the `yield` keyword, we get what is called a **generator**.
+
+Generally speaking, everything before the `yield` statement will be the setup, and everything after it will be the cleanup.
+
+The statement after `yield` will be executed after the test case finishes, either if it passed or not.
+
+The scope of the fixture can be changed as well, the default scope is function, which mean that the fixture will run once for eaach function that needs it, however, if you change the scope to _session_, then the fixture then the fixture runs one time for the entire test suite, being executed in the first test that requires it.
+
+Scope levels:
+- class
+- module
+- package
+
+Pytest provides several fixtures out of the box, for example:
+- monkeypatch: Temporarily modify classes, functions, dictionaries, `os.environ`, and other objects.
+- request: Provide information on the executing test function (test case metadata).
+- tmpdir / tmp_path: Provides temporary directories.
+
+### Advanced fixtures tricks
+To reuse a fixture among several Test Cases, create a file in the Test Directory called `conftest.py`
