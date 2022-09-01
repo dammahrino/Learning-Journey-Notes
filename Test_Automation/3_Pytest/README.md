@@ -134,3 +134,36 @@ Pytest provides several fixtures out of the box, for example:
 
 ### Advanced fixtures tricks
 To reuse a fixture among several Test Cases, create a file in the Test Directory called `conftest.py`
+
+## Pytest Commands and Configs
+To get information about the commands, run `python -m pytest --help`.
+
+Commands:
+- --verbose, -v
+  - Pytest prints more data about the Test Execution
+  - At the top, prints _cachedir_ and _metadata_.
+  - Also print a single line for each TC execution, giving its `path::name::PASSED/FAIL`
+  - Failure instrospection for analysis.
+
+- --quite, -q 
+  - Pytest doesn't print the top matter or even the Test Modules, and the Test failures.
+  - Good when you want to avoid polluting your console with too many lines.
+
+- --exitfirst, -x
+  - Exits the Test Execution on the first Test Case that fails.
+
+- --maxfail=number
+  - Specifies after how many failures the execution should stop.
+
+- --junit-xml report_file_path
+
+Configuration:
+- Supports multiple configuration files:
+  - pytest.ini
+  - pyproject.toml
+  - setup.cfg
+
+- Configurations should be loaded in the projects' root directory.
+- Configuration options:
+  - addopts
+    - Allows you to set configurations directly, as if they would be entered on the command line.
