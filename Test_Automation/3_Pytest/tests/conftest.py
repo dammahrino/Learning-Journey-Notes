@@ -1,5 +1,5 @@
 import pytest
-from stuff import Accumulator
+from stuff.accum import Accumulator
 
 @pytest.fixture
 def accum():
