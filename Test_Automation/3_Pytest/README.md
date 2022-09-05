@@ -145,7 +145,7 @@ Commands:
   - Also print a single line for each TC execution, giving its `path::name::PASSED/FAIL`
   - Failure instrospection for analysis.
 
-- --quite, -q 
+- --quiet, -q 
   - Pytest doesn't print the top matter or even the Test Modules, and the Test failures.
   - Good when you want to avoid polluting your console with too many lines.
 
@@ -167,3 +167,78 @@ Configuration:
 - Configuration options:
   - addopts
     - Allows you to set configurations directly, as if they would be entered on the command line.
+
+## Filtering Tests
+
+We can run Tests in a specific directory, adding the folder at the end of the command as follows:
+
+`python3 -m pytest folder_name`
+
+By default, if no folder argument is provided, PyTest will run all the Test Cases.
+
+Similarly, we can run a specific Test File, providing the route in the command line as follows:
+
+`python3 -m pytest folder_name/test_file.py`
+
+Finally, to run specifically a single Test Case, we're able to declare it with double colon after the test file:
+
+`python3 -m pytest folder_name/test_file.py::test_name`
+
+If you don't know the name of a test, or you just want to run every test that has a specific keyword, they can be run with the following command:
+
+`python3 -m pytest -k keyword`
+
+The `-k` flag, also supports boolean logic with _and_, _or_, and _not_ keywords.
+
+For example:
+
+`python3 -m pytest -k "one and not accum"`,
+
+will run the tests that contain the keyword **one**, but not those ones that match the word **accum**.
+
+Sometimes, using the `-k` flag might lead to false positives. To avoid this, we have another option to filter test cases, and this is with **markers**.
+
+>**Markers**: They're basically tags for test cases.
+
+To add a marker, above the test function, add the following decorator
+
+`@pytest.mark.marker_name`
+
+For example, if we want to add the *math* marker to a test, we would do as follows:
+
+```python
+@pytest.mark.math
+def test_one_plus_one():
+  # Test logic
+
+```
+
+And we also need to add them in the python configuration file.
+
+```ini
+[pytest]
+markers = 
+  math
+```
+
+Finally, to run the test cases with specific markers, run the following command:
+
+`python -m pytest -m marker_tag`
+
+The markers can also be used along with the *boolean* operators. Below there's a small list of commonly used markers:
+
+- **skip**: always skip a test function
+- **skipif**: skip a test function if a certain condition is met
+- **xfail**: produce an "expected failure" outcome if a certain condition is met
+- **parametrize**: to perform multiple calls to the same test function
+
+More information about this in: [PyTest Markers](https://docs.pytest.org/en/stable/how-to/mark.html)
+
+Pytest will look for Test Cases either in the current directory or from the paths and options given at the command line. But another test paths can be set through the configuration file.
+
+```ini
+[pytest]
+testpaths = 
+  testing
+  docs
+```
