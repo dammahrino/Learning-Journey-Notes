@@ -242,3 +242,19 @@ testpaths =
   testing
   docs
 ```
+
+## Feature Tests
+
+There's a difference between testing **code** and testing **features**.
+
+White Box tests, are sometimes called Unit Tests, which is what we've doing so far. This type of tests, test *code* directly. 
+
+> Is the code written to do expected things?
+
+Black Box tests, are commonly called feature tests, integration tests, system tests or end-to-end tests. In this case, these kind of tests interact with a live instance of the product.
+
+> Does the product meet the requirements?
+
+Feature tests require an extra setup, since they require an instance which is either a deployed service, a web app, or something else.
+
+Integration tests are prone to errors due to their dependencies on systems under test and feature tests are *slower* than unit tests, because they need to wait for the product under test to respond.
